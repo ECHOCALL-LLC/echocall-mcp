@@ -1,5 +1,7 @@
 # EchoCall MCP server
 
+[![mcptry](https://mcptry.com/badge/de.echocall/echocall)](https://mcptry.com/servers/de.echocall/echocall)
+
 The official MCP (Model Context Protocol) server of [EchoCall](https://echocall.de/en/mcp), the platform for AI phone and chat agents. It connects ChatGPT, Claude, Cursor, VS Code, Claude Code and any other MCP client to your EchoCall workspace. Your AI app can then review calls and chats, adjust your voice and chat agents, keep their knowledge current, manage phone numbers and prepare call campaigns, all in plain sentences.
 
 This is a hosted (remote) server. There is nothing to install: you add one URL to your AI app and sign in to EchoCall in your browser.
@@ -10,7 +12,7 @@ This is a hosted (remote) server. There is nothing to install: you add one URL t
 | Transport | Streamable HTTP |
 | Sign-in | OAuth with PKCE in the browser, or an EchoCall API key as a bearer token |
 | Access levels | Read only, or read and change |
-| Tools | Every function of the EchoCall API v1 as a tool, 168 tools in 17 areas |
+| Tools | Built from the EchoCall API v1: 168 tools in 18 areas, 254 tools in 20 areas for reseller accounts |
 | MCP Registry | `de.echocall/echocall` |
 | Price | Included in every EchoCall plan, the free starting credit counts (14 days, no credit card) |
 
@@ -87,22 +89,25 @@ https://hub.echocall.de/mcp?tags=agents,conversations
 
 | Area (`?tags=` value) | Tools | What it covers |
 | --- | ---: | --- |
-| `agents` | 9 | Create and edit voice agents: greeting, instructions, voice, language |
-| `chatbots` | 9 | Web chat agents and their chat widget |
-| `conversations` | 6 | Calls and chats with transcripts, from the phone, the website chat and WhatsApp |
-| `analytics` | 4 | Call counts, durations and agent performance per day, week or agent |
-| `knowledge` | 8 | Add website pages and other sources to an agent's knowledge, refresh or remove them |
-| `voices` | 2 | The EchoCall voice library |
-| `phonenumbers` | 10 | Search numbers by country, buy them and assign them to agents |
+| `agents` | 9 | Create and edit voice agents: greeting, instructions, voice, language and the integrations they use |
+| `chatbots` | 13 | Web chat agents, their chat widget, embed code and integrations |
+| `conversations` | 6 | Calls and chats with transcripts, reply to a live chat and close it |
+| `analytics` | 5 | Dashboard overview, calls and durations per day, voice and chat agent performance |
+| `knowledge` | 15 | Add website pages, files and other sources to the knowledge of voice and chat agents, refresh, sync or remove them |
+| `voices` | 3 | The EchoCall voice library and voice models |
+| `phonenumbers` | 16 | Search and buy numbers, numbers available right away, verification, renewal and assignment to agents |
 | `batchcalling` | 7 | Create, review, start or cancel outbound call campaigns |
-| `tickets` | 4 | Support tickets |
+| `tickets` | 5 | Open, answer and close support tickets |
 | `webhooks` | 7 | Event notifications for your own systems |
-| `integrations` | 15 | Calendar and contact center integrations of your agents |
-| `billing` | 7 | Usage, invoices and plans |
-| `users` | 3 | Your profile |
-| `notifications` | 3 | Your notification inbox |
+| `integrations` | 20 | Calendar and contact center integrations of your agents, bookings and permissions |
+| `billing` | 22 | Balance and top-ups, invoices, payment methods, plans, subscriptions, orders and usage |
+| `team` | 10 | Team members and invites, live chat agents and their status |
+| `presence` | 10 | AI avatar Presence: devices, commands, live sessions and usage |
+| `developer` | 8 | API keys, API request logs and the AI apps connected to your workspace |
+| `users` | 5 | Your profile, billing address, usage and limits |
+| `notifications` | 5 | Your notification inbox and product announcements |
 | `utilities` | 2 | Service health and localization helpers |
-| `reseller` | 66 | Customer accounts, credits and branding, for reseller accounts only |
+| `reseller` | 80 | Customer accounts, plans, credits, invoices, phone numbers, pricing, branding and email, for reseller accounts only |
 | `provisioning` | 6 | Account lifecycle hooks, for reseller accounts only |
 
 Example requests:
@@ -112,7 +117,7 @@ Example requests:
 - "Add our new pricing page to the knowledge of the Reception agent."
 - "Set up a campaign for tomorrow's appointment reminders, but do not start it yet."
 
-Every tool tells your AI app whether it only reads. Irreversible tools and tools that cost money, such as buying a number, say so at the start of their description.
+Every tool tells your AI app whether it only reads. Irreversible tools and tools that cost money, such as buying a number, say so at the start of their description and only run after a confirmation: EchoCall first answers with a confirmation request, and your AI app has to ask you for a clear yes. A connection can run at most 10 actions that cost money per hour.
 
 ## Security
 
