@@ -1,6 +1,6 @@
 # EchoCall MCP server
 
-[![mcptry](https://mcptry.com/badge/de.echocall/echocall)](https://mcptry.com/servers/de.echocall/echocall)
+[![EchoCall MCP connector: tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/de.echocall/echocall/badges/score.svg)](https://glama.ai/mcp/connectors/de.echocall/echocall) [![mcptry](https://mcptry.com/badge/de.echocall/echocall)](https://mcptry.com/servers/de.echocall/echocall)
 
 The official MCP (Model Context Protocol) server of [EchoCall](https://echocall.de/en/mcp), the platform for AI phone and chat agents. It connects ChatGPT, Claude, Cursor, VS Code, Claude Code and any other MCP client to your EchoCall workspace. Your AI app can then review calls and chats, adjust your voice and chat agents, keep their knowledge current, manage phone numbers and prepare call campaigns, all in plain sentences.
 
