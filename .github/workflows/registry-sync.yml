@@ -1,0 +1,67 @@
+# Keeps the MCP Registry entry on the version the live server reports.
+# The live server (serverInfo.version) is the source of truth: when the registry
+# lags behind, this publishes server.json with the live version.
+name: Registry sync
+
+on:
+  push:
+    branches: [main]
+    paths: [server.json, .github/workflows/registry-sync.yml]
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: registry-sync
+  cancel-in-progress: false
+
+env:
+  SERVER_NAME: de.echocall/echocall
+  MCP_URL: https://hub.echocall.de/mcp
+  PUBLISHER_VERSION: v1.8.7
+  PUBLISHER_SHA256: 00b21004149a4ce66f0782508ae4a2bce67d1bea395a8da0bd8028159fb59579
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Compare live server, registry and repo
+        id: v
+        run: |
+          set -euo pipefail
+          live=$(curl -fsS -m 30 -X POST "$MCP_URL" \
+            -H 'Content-Type: application/json' \
+            -H 'Accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"registry-sync","version":"1.0.0"}}}' \
+            | sed -n 's/.*"serverInfo":{[^}]*"version":"\([0-9][^"]*\)".*/\1/p' | head -n 1)
+          if [ -z "$live" ]; then echo "::error::Live server returned no serverInfo.version"; exit 1; fi
+          registry=$(curl -fsS -m 30 "https://registry.modelcontextprotocol.io/v0/servers/$(jq -rn --arg n "$SERVER_NAME" '$n|@uri')/versions/latest" | jq -r '.server.version')
+          repo=$(jq -r '.version' server.json)
+          echo "live=$live registry=$registry repo=$repo"
+          if [ "$repo" != "$live" ]; then echo "::warning::server.json in this repo says $repo, the live server $live. Bump server.json."; fi
+          echo "live=$live" >> "$GITHUB_OUTPUT"
+          if [ "$registry" = "$live" ]; then echo "publish=false" >> "$GITHUB_OUTPUT"; else echo "publish=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Publish the live version
+        if: steps.v.outputs.publish == 'true'
+        env:
+          LIVE_VERSION: ${{ steps.v.outputs.live }}
+          MCP_REGISTRY_KEY: ${{ secrets.MCP_REGISTRY_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$MCP_REGISTRY_KEY" ]; then echo "::error::Secret MCP_REGISTRY_KEY is missing"; exit 1; fi
+          curl -fsSL -m 60 -o mcp-publisher.tar.gz \
+            "https://github.com/modelcontextprotocol/registry/releases/download/${PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz"
+          echo "${PUBLISHER_SHA256}  mcp-publisher.tar.gz" | sha256sum -c -
+          tar -xzf mcp-publisher.tar.gz mcp-publisher
+          jq --arg v "$LIVE_VERSION" '.version = $v' server.json > "$RUNNER_TEMP/server.json"
+          ./mcp-publisher validate "$RUNNER_TEMP/server.json"
+          ./mcp-publisher login dns --domain echocall.de --private-key "$MCP_REGISTRY_KEY"
+          ./mcp-publisher publish "$RUNNER_TEMP/server.json"
+          echo "Published $SERVER_NAME $LIVE_VERSION"
