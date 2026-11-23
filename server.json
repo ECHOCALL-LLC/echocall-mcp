@@ -3,7 +3,7 @@
   "name": "de.echocall/echocall",
   "title": "EchoCall",
   "description": "Run EchoCall AI phone and chat agents from ChatGPT or Claude: calls, agents, knowledge and numbers.",
-  "version": "1.22.0",
+  "version": "1.24.0",
   "websiteUrl": "https://echocall.de/en/mcp",
   "repository": {
     "url": "https://github.com/ECHOCALL-LLC/echocall-mcp",

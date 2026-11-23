@@ -12,7 +12,7 @@ This is a hosted (remote) server. There is nothing to install: you add one URL t
 | Transport | Streamable HTTP |
 | Sign-in | OAuth with PKCE in the browser, or an EchoCall API key as a bearer token |
 | Access levels | Read only, or read and change |
-| Tools | Built from the EchoCall API v1: 168 tools in 18 areas, 254 tools in 20 areas for reseller accounts |
+| Tools | Built from the EchoCall API v1: 171 tools in 18 areas, 257 tools in 20 areas for reseller accounts |
 | MCP Registry | `de.echocall/echocall` |
 | Price | Included in every EchoCall plan, the free starting credit counts (14 days, no credit card) |
 
@@ -100,11 +100,11 @@ https://hub.echocall.de/mcp?tags=agents,conversations
 | `tickets` | 5 | Open, answer and close support tickets |
 | `webhooks` | 7 | Event notifications for your own systems |
 | `integrations` | 20 | Calendar and contact center integrations of your agents, bookings and permissions |
-| `billing` | 22 | Balance and top-ups, invoices, payment methods, plans, subscriptions, orders and usage |
+| `billing` | 23 | Balance and top-ups, pay as you go, invoices, payment methods, plans, subscriptions, orders and usage |
 | `team` | 10 | Team members and invites, live chat agents and their status |
 | `presence` | 10 | AI avatar Presence: devices, commands, live sessions and usage |
 | `developer` | 8 | API keys, API request logs and the AI apps connected to your workspace |
-| `users` | 5 | Your profile, billing address, usage and limits |
+| `users` | 7 | Your profile, billing address, usage and limits, and which warning mails you get and how often |
 | `notifications` | 5 | Your notification inbox and product announcements |
 | `utilities` | 2 | Service health and localization helpers |
 | `reseller` | 80 | Customer accounts, plans, credits, invoices, phone numbers, pricing, branding and email, for reseller accounts only |
