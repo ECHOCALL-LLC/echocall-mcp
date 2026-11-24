@@ -145,6 +145,8 @@ An active EchoCall plan. The free starting credit counts, so you can connect rig
 
 This repository documents the hosted EchoCall MCP server and holds its [`server.json`](server.json) for the official MCP Registry. The server itself runs as part of EchoCall Hub, so there is no code to install or run here.
 
+The contents of this repository are licensed under the Apache License 2.0, see [LICENSE](LICENSE). Copyright EchoCall LLC.
+
 ## Deutsch
 
 EchoCall MCP ist der offizielle MCP-Server von EchoCall unter `https://hub.echocall.de/mcp`. Er verbindet ChatGPT, Claude, Cursor, VS Code und Claude Code mit Ihrem EchoCall-Workspace. Die KI-App kann dann Anrufe, Chats und Auswertungen lesen und, wenn Sie es erlauben, Agenten, Wissen, Rufnummern und Kampagnen für Sie bearbeiten. Sie melden sich einmal im Browser bei EchoCall an und wählen Nur lesen oder Lesen und ändern. EchoCall MCP ist in jedem Paket enthalten, das kostenlose Startguthaben zählt (14 Tage, ohne Kreditkarte).
