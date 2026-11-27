@@ -12,9 +12,9 @@ This is a hosted (remote) server. There is nothing to install: you add one URL t
 | Transport | Streamable HTTP |
 | Sign-in | OAuth with PKCE in the browser, or an EchoCall API key as a bearer token |
 | Access levels | Read only, or read and change |
-| Tools | Built from the EchoCall API v1: 177 tools in 18 areas, 278 tools in 20 areas for reseller accounts. Your AI app loads the core first and finds the rest with `search_tools` |
+| Tools | Built from the EchoCall API v1: 178 tools in 18 areas, 279 tools in 20 areas for reseller accounts. Your AI app loads the core first and finds the rest with `search_tools` |
 | MCP Registry | `de.echocall/echocall` |
-| Price | Included in every EchoCall plan, the free starting credit counts (14 days, no credit card) |
+| Price | No extra charge. Works during the free trial (14 days, no credit card) and with pay as you go |
 
 Product page: [echocall.de/en/mcp](https://echocall.de/en/mcp) (German: [echocall.de/mcp](https://echocall.de/mcp))
 
@@ -107,7 +107,7 @@ https://hub.echocall.de/mcp?tags=core,billing
 | `analytics` | 5 | Dashboard overview, calls and durations per day, voice and chat agent performance |
 | `knowledge` | 15 | Add website pages, files and other sources to the knowledge of voice and chat agents, refresh, sync or remove them |
 | `voices` | 3 | The EchoCall voice library and voice models |
-| `phonenumbers` | 16 | Search and buy numbers, numbers available right away, verification, renewal and assignment to agents |
+| `phonenumbers` | 17 | Search and buy numbers, numbers available right away, verification, renewal, assignment to agents and the connection details of the EchoCall SIP gateway for your own phone system |
 | `batchcalling` | 7 | Create, review, start or cancel outbound call campaigns |
 | `tickets` | 5 | Open, answer and close support tickets |
 | `webhooks` | 7 | Event notifications for your own systems |
@@ -143,7 +143,7 @@ Important: with read and change, an AI app can also delete agents, buy phone num
 
 ## Requirements
 
-An active EchoCall plan. The free starting credit counts, so you can connect right after signing up at [hub.echocall.de](https://hub.echocall.de) and try it for 14 days, no credit card required.
+An EchoCall account. MCP works during the free trial, with pay as you go and with a plan from your EchoCall partner, at no extra charge, so you can connect right after signing up at [hub.echocall.de](https://hub.echocall.de) and try it for 14 days, no credit card required.
 
 ## Links
 
@@ -161,6 +161,6 @@ The contents of this repository are licensed under the Apache License 2.0, see [
 
 ## Deutsch
 
-EchoCall MCP ist der offizielle MCP-Server von EchoCall unter `https://hub.echocall.de/mcp`. Er verbindet ChatGPT, Claude, Cursor, VS Code und Claude Code mit Ihrem EchoCall-Workspace. Die KI-App kann dann Anrufe, Chats und Auswertungen lesen und, wenn Sie es erlauben, Agenten, Wissen, Rufnummern und Kampagnen für Sie bearbeiten. Sie melden sich einmal im Browser bei EchoCall an und wählen Nur lesen oder Lesen und ändern. Ihre KI-App lädt zuerst nur die Kernwerkzeuge und findet alle weiteren bei Bedarf mit `search_tools`, mit `?tags=all` an der Adresse lädt sie alle auf einmal. EchoCall MCP ist in jedem Paket enthalten, das kostenlose Startguthaben zählt (14 Tage, ohne Kreditkarte).
+EchoCall MCP ist der offizielle MCP-Server von EchoCall unter `https://hub.echocall.de/mcp`. Er verbindet ChatGPT, Claude, Cursor, VS Code und Claude Code mit Ihrem EchoCall-Workspace. Die KI-App kann dann Anrufe, Chats und Auswertungen lesen und, wenn Sie es erlauben, Agenten, Wissen, Rufnummern und Kampagnen für Sie bearbeiten. Sie melden sich einmal im Browser bei EchoCall an und wählen Nur lesen oder Lesen und ändern. Ihre KI-App lädt zuerst nur die Kernwerkzeuge und findet alle weiteren bei Bedarf mit `search_tools`, mit `?tags=all` an der Adresse lädt sie alle auf einmal. EchoCall MCP kostet nichts extra und funktioniert im kostenlosen Testzeitraum (14 Tage, ohne Kreditkarte) und mit Pay as you go.
 
 Alle Details und die Einrichtung Schritt für Schritt: [echocall.de/mcp](https://echocall.de/mcp)
