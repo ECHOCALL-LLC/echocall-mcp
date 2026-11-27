@@ -12,7 +12,7 @@ This is a hosted (remote) server. There is nothing to install: you add one URL t
 | Transport | Streamable HTTP |
 | Sign-in | OAuth with PKCE in the browser, or an EchoCall API key as a bearer token |
 | Access levels | Read only, or read and change |
-| Tools | Built from the EchoCall API v1: 171 tools in 18 areas, 257 tools in 20 areas for reseller accounts |
+| Tools | Built from the EchoCall API v1: 177 tools in 18 areas, 278 tools in 20 areas for reseller accounts. Your AI app loads the core first and finds the rest with `search_tools` |
 | MCP Registry | `de.echocall/echocall` |
 | Price | Included in every EchoCall plan, the free starting credit counts (14 days, no credit card) |
 
@@ -77,19 +77,31 @@ Authorization: Bearer eck_live_...
 
 The key carries the same rights as in the EchoCall API.
 
-### Fewer tools
+### Which tools your AI app loads
 
-Append `?tags=` to the URL and EchoCall only offers those areas, for example:
+Every tool in the list takes up room in your AI app's context with each request. So without `?tags=`, EchoCall lists only the core: the tools for voice agents, phone numbers, calls and chats, voices and languages (the areas `agents`, `phonenumbers`, `conversations`, `voices` and `utilities`), plus two more:
+
+- `search_tools` finds any other tool your connection may use and returns it with its input schema.
+- `run_tool` runs such a tool with the same permissions, limits, logs and confirmations as calling it directly.
+
+Your AI app keeps every function of the API without reading all tool definitions up front. To load more areas from the start, append them to the URL:
 
 ```
-https://hub.echocall.de/mcp?tags=agents,conversations
+https://hub.echocall.de/mcp?tags=core,billing
 ```
+
+| URL | Tools listed |
+| --- | --- |
+| `https://hub.echocall.de/mcp` | The core areas, plus `search_tools` and `run_tool` |
+| `…/mcp?tags=core,billing` | The core areas and billing, plus `search_tools` and `run_tool` |
+| `…/mcp?tags=agents,conversations` | Only these areas, plus `search_tools` and `run_tool` |
+| `…/mcp?tags=all` | Every tool at once, as before API 1.28.0 |
 
 ## What your AI app can do
 
 | Area (`?tags=` value) | Tools | What it covers |
 | --- | ---: | --- |
-| `agents` | 9 | Create and edit voice agents: greeting, instructions, voice, language and the integrations they use |
+| `agents` | 11 | Create and edit voice agents: greeting, instructions, voice, language, call summaries and the integrations they use |
 | `chatbots` | 13 | Web chat agents, their chat widget, embed code and integrations |
 | `conversations` | 6 | Calls and chats with transcripts, reply to a live chat and close it |
 | `analytics` | 5 | Dashboard overview, calls and durations per day, voice and chat agent performance |
@@ -100,14 +112,14 @@ https://hub.echocall.de/mcp?tags=agents,conversations
 | `tickets` | 5 | Open, answer and close support tickets |
 | `webhooks` | 7 | Event notifications for your own systems |
 | `integrations` | 20 | Calendar and contact center integrations of your agents, bookings and permissions |
-| `billing` | 23 | Balance and top-ups, pay as you go, invoices, payment methods, plans, subscriptions, orders and usage |
+| `billing` | 27 | Balance and top-ups, pay as you go, invoices, payment methods, plans, subscriptions, orders, usage and one-time setup services |
 | `team` | 10 | Team members and invites, live chat agents and their status |
 | `presence` | 10 | AI avatar Presence: devices, commands, live sessions and usage |
 | `developer` | 8 | API keys, API request logs and the AI apps connected to your workspace |
 | `users` | 7 | Your profile, billing address, usage and limits, and which warning mails you get and how often |
 | `notifications` | 5 | Your notification inbox and product announcements |
 | `utilities` | 2 | Service health and localization helpers |
-| `reseller` | 80 | Customer accounts, plans, credits, invoices, phone numbers, pricing, branding and email, for reseller accounts only |
+| `reseller` | 95 | Customer accounts, plans, credits, invoices, phone numbers and a number stock to bill on, pricing, branding and email, for reseller accounts only |
 | `provisioning` | 6 | Account lifecycle hooks, for reseller accounts only |
 
 Example requests:
@@ -149,6 +161,6 @@ The contents of this repository are licensed under the Apache License 2.0, see [
 
 ## Deutsch
 
-EchoCall MCP ist der offizielle MCP-Server von EchoCall unter `https://hub.echocall.de/mcp`. Er verbindet ChatGPT, Claude, Cursor, VS Code und Claude Code mit Ihrem EchoCall-Workspace. Die KI-App kann dann Anrufe, Chats und Auswertungen lesen und, wenn Sie es erlauben, Agenten, Wissen, Rufnummern und Kampagnen für Sie bearbeiten. Sie melden sich einmal im Browser bei EchoCall an und wählen Nur lesen oder Lesen und ändern. EchoCall MCP ist in jedem Paket enthalten, das kostenlose Startguthaben zählt (14 Tage, ohne Kreditkarte).
+EchoCall MCP ist der offizielle MCP-Server von EchoCall unter `https://hub.echocall.de/mcp`. Er verbindet ChatGPT, Claude, Cursor, VS Code und Claude Code mit Ihrem EchoCall-Workspace. Die KI-App kann dann Anrufe, Chats und Auswertungen lesen und, wenn Sie es erlauben, Agenten, Wissen, Rufnummern und Kampagnen für Sie bearbeiten. Sie melden sich einmal im Browser bei EchoCall an und wählen Nur lesen oder Lesen und ändern. Ihre KI-App lädt zuerst nur die Kernwerkzeuge und findet alle weiteren bei Bedarf mit `search_tools`, mit `?tags=all` an der Adresse lädt sie alle auf einmal. EchoCall MCP ist in jedem Paket enthalten, das kostenlose Startguthaben zählt (14 Tage, ohne Kreditkarte).
 
 Alle Details und die Einrichtung Schritt für Schritt: [echocall.de/mcp](https://echocall.de/mcp)
